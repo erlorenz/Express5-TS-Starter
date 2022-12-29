@@ -5,8 +5,8 @@ export default function errorHandler(
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   logger.error('Error hit the express error handler.');
-  res.sendStatus(500);
+  res.status(500).send({ message: 'Caught in Express error handler.' });
 }

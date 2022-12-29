@@ -9,7 +9,7 @@ export function initializeMiddleware(app: Express) {
   app.use(cors());
 
   app.get('/testAsyncError', async (req: Request, res: Response) => {
-    await new Promise((resolve, reject) => reject('Because I said so!'));
+    throw new Error('Error in async handler');
   });
 
   app.use(errorHandler);

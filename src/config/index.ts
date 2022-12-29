@@ -1,16 +1,15 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-import { z } from 'zod';
+import { string, z } from 'zod';
+import logger from './logger';
 
 const configVars = {
   PORT: process.env.PORT || '5000',
-  NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
 const schema = z.object({
   PORT: z.string().length(4),
-  NODE_ENV: z.literal('development' || 'production'),
+  NODE_ENV: z.enum(['development', 'production', 'test']),
+  // MISSING: string(),
 });
 
 export function validateConfig() {
