@@ -13,8 +13,8 @@ export default function errorHandler(
 
   // Do some checking for the type and response approproately
   if (err instanceof HttpException) {
-    logger.error(err, 'BAD REQUEST!');
-    return res.status(400).send({ error: err.message });
+    logger.error(err, err.message);
+    return res.status(err.statusCode).send({ error: err.message });
   }
 
   res.status(500).send({ message: 'Caught in Express error handler.' });
