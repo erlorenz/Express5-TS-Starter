@@ -13,7 +13,7 @@ process.on('unhandledRejection', (reason: Error) => {
   throw reason;
 });
 
-// Crash if missing
+// Crash if missing env variables
 validateConfig();
 
 // Express Initialization

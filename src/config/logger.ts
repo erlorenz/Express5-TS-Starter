@@ -5,3 +5,5 @@ const logger = pino({
 });
 
 export default logger;
+
+// TODO: Add structured logging for GCP

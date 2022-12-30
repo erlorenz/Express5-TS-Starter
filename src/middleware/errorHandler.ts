@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
 import logger from '../config/logger';
+import { HttpException } from '../utils/error/HttpExceptions';
 
 export default function errorHandler(
   err: Error,
@@ -8,5 +10,12 @@ export default function errorHandler(
   _next: NextFunction
 ) {
   logger.error('Error hit the express error handler.');
+
+  // Do some checking for the type and response approproately
+  if (err instanceof HttpException) {
+    logger.error(err, 'BAD REQUEST!');
+    return res.status(400).send({ error: err.message });
+  }
+
   res.status(500).send({ message: 'Caught in Express error handler.' });
 }
