@@ -3,10 +3,6 @@ import * as PostsServices from '../services';
 import { z, ZodError } from 'zod';
 import { Post } from '../types/Post';
 import logger from '../../../config/logger';
-import {
-	BadRequestException,
-	HttpException,
-} from '../../../utils/error/HttpExceptions';
 import { validateBody } from '../../../utils/validation';
 
 // Coerce user id to number
