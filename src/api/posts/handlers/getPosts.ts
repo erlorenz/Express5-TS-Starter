@@ -7,18 +7,15 @@ import {
 	BadRequestException,
 	HttpException,
 } from '../../../utils/error/HttpExceptions';
+import { validateBody } from '../../../utils/validation';
 
 // Coerce user id to number
 const userIdSchema = z.coerce.number().optional();
+type UserId = z.infer<typeof userIdSchema>;
 
 export async function getPosts(req: Request, res: Response) {
-	// ZodError can be simplified to BadRequestError
-	let userId: number | undefined;
-	try {
-		userId = userIdSchema.parse(req.query.userId);
-	} catch (err) {
-		throw new BadRequestException('Validation error in user ID');
-	}
+	// Validation
+	const userId = validateBody<UserId>(userIdSchema, req.body);
 
 	logger.info(`USERID: ${userId}`);
 
