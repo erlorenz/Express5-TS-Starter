@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
 import * as PostsServices from '../services';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 import { Post } from '../types/Post';
 import logger from '../../../config/logger';
-import { validateBody } from '../../../utils/validation';
+import { validateQuery } from '../../../utils/validateRequest';
 
 // Coerce user id to number
-const userIdSchema = z.coerce.number().optional();
-type UserId = z.infer<typeof userIdSchema>;
+const userIdSchema = z.object({
+	userId: z.coerce.number().optional(),
+});
 
 export async function getPosts(req: Request, res: Response) {
 	// Validation
-	const userId = validateBody<UserId>(userIdSchema, req.body);
+	const { userId } = validateQuery(userIdSchema, req.query);
 
 	logger.info(`USERID: ${userId}`);
 
