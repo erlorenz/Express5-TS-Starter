@@ -5,6 +5,7 @@ import { Post } from '../types/Post';
 import logger from '../../../config/logger';
 import { validateQuery } from '../../../utils/validateRequest';
 
+// Request schema can be in separate DTO file if needed
 // Coerce user id to number
 const userIdSchema = z.object({
 	userId: z.coerce.number().optional(),

@@ -9,7 +9,7 @@ A Node.js API boilerplate with modern and experimental features.
 - Global error handling middleware
 - Custom HTTP exceptions
 - Pino logger with GCP structure
-- Zod request body validation
+- Request validation with Zod
 - Rome linter/formatter
 - Node-fetch (will be replaced with native Fetch API in 20.0)
 - Node native test runner
