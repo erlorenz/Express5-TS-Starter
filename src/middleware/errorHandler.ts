@@ -8,14 +8,16 @@ export default function errorHandler(
 	res: Response,
 	_next: NextFunction,
 ) {
+
+	// Do some checking for the type and respond approproately
 	logger.error(err, err.message);
 
-	let test = 'sdfafs' + 'sdffd';
-
-	// Do some checking for the type and response approproately
 	if (err instanceof HttpException) {
 		return res.status(err.statusCode).send({ error: err.message });
-	}
+	};
 
-	res.status(500).send({ message: 'Internal error.' });
+	
+	return res.status(500).send({message: err.message});
+
 }
+ 
